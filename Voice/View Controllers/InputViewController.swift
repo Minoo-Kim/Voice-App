@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import InstantSearchVoiceOverlay
 
 class InputViewController: UIViewController {
 
@@ -26,12 +27,17 @@ class InputViewController: UIViewController {
     // date picker setup
     let datePicker = UIDatePicker()
     
+    // voice input
+    let voiceOverlay = VoiceOverlayController()
   
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpElements()
         nurse.inputView = pickerView
     }
+    
+    
+    
     
     func validateFields()->String?{
         // Check that all fields are filled in
@@ -43,6 +49,28 @@ class InputViewController: UIViewController {
             return "Please fill in all fields."
         }
         return nil
+    }
+    
+    // voice input
+    @IBAction func didTapVoice(_ sender: Any) {
+        voiceOverlay.settings.autoStart=false;
+        voiceOverlay.settings.autoStop=true;
+        voiceOverlay.settings.autoStopTimeout = 2;
+        voiceOverlay.start(on: self, textHandler: {text, final, _ in
+            if final{
+                let sentence = text.components(separatedBy: " ")
+                self.patient.text = sentence[0] + " " + sentence[1];
+                self.medicine.text = sentence[2];
+                self.amount.text = sentence[3]+sentence[4];
+                self.nurse.text = sentence[5] + " " + sentence[6];
+                // do time manually
+            }
+            else {
+                print("In progress:  \(text)")
+            }
+        }, errorHandler: { error in
+                    
+        })
     }
     
     @IBAction func doneTapped(_ sender: Any) {
@@ -160,6 +188,7 @@ class InputViewController: UIViewController {
         time.text = formatter.string(from: datePicker.date)
         self.view.endEditing(true)
     }
+    
 
 }
 
