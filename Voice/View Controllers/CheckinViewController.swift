@@ -61,22 +61,28 @@ class CheckinViewController: UIViewController {
             values.append(cell.TextView.text!)
         }
         for val in values{
-            let time = val.components(separatedBy: " ").last
+            let sentence = val.components(separatedBy: " ")
+            let patient = sentence[5] + " " + sentence[6];
+            print(patient);
             let db = Firestore.firestore()
-            db.collection("medical").whereField("nurseUID", isEqualTo: Auth.auth().currentUser!.uid).whereField("time", isEqualTo: time!)
+            // potentially add more whereField conditions (time, date, etc) here to guarantee correct match
+            db.collection("medical").whereField("nurseUID", isEqualTo: Auth.auth().currentUser!.uid).whereField("patient", isEqualTo: patient)
                 .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 }
                 else{
                     for document in querySnapshot!.documents {
+                        let docID = document.documentID;
                         // change completed field to true
-                        document.update({"completed": true})
+                        print("computer has reached this code");
+                        print(document["medicine"] as! String);
+                        db.collection("medical").document(docID).updateData(["completed" : true]);
                     }
                 }
             }
         }
-        print(values)
+        print(values);
     }
 }
 extension CheckinViewController: UITableViewDelegate, UITableViewDataSource {
