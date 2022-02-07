@@ -11,6 +11,5 @@ target 'Voice' do
     pod 'Firebase/Auth'
     pod 'Firebase/Core'
     pod 'Firebase/Firestore'
-
-
+    pod 'InstantSearchVoiceOverlay'
 end
