@@ -6,7 +6,7 @@ Brief description: iOS app for efficient clinical communication mainly between d
 
 
 
-<img src="https://raw.githubusercontent.com/Minoo-Kim/Voice-App/main/Database_UI_Preview.png" width="400">
+<img src="https://raw.githubusercontent.com/Minoo-Kim/Voice-App/main/Database_UI_Preview.png" width="1400">
 
 Above is a chemical supply chain inventory system I developed. Currently working on integrating it into the Voice app. 
 
