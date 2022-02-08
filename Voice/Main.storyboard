@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -271,15 +271,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="280" translatesAutoresizingMaskIntoConstraints="NO" id="sLj-aq-kjI">
-                                <rect key="frame" x="40" y="288" width="334" height="342"/>
+                                <rect key="frame" x="40" y="288" width="334" height="31"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ml5-4s-MHn">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="31"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Dashboard"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YN3-lr-fwv" userLabel="Input">
-                                        <rect key="frame" x="0.0" y="311" width="334" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Input"/>
                                         <connections>
@@ -288,6 +283,15 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ml5-4s-MHn">
+                                <rect key="frame" x="40" y="582" width="334" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Dashboard"/>
+                                <connections>
+                                    <segue destination="f7w-BB-FoE" kind="show" id="WhA-Ea-tdw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f3g-33-lpL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -302,6 +306,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNf-pY-hzO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4044.9275362318845" y="-275.22321428571428"/>
+        </scene>
+        <!--Dashboard View Controller-->
+        <scene sceneID="2Sb-f0-RA6">
+            <objects>
+                <viewController id="f7w-BB-FoE" customClass="DashboardViewController" customModule="Voice" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Sqw-tL-Vos">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DashCell" rowHeight="738" id="otS-se-sK0" customClass="DashboardTableViewCell" customModule="Voice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="738"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="otS-se-sK0" id="rkw-V8-ZvZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jO1-ml-nxG" userLabel="DashText">
+                                            <rect key="frame" x="20" y="0.0" width="374" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <color key="textColor" systemColor="labelColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="DashText" destination="jO1-ml-nxG" id="Zj4-fM-Ead"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="RDF-fL-DjO"/>
+                    <connections>
+                        <outlet property="DashView" destination="Sqw-tL-Vos" id="0cq-j4-y7E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rr7-aB-yfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4976.811594202899" y="267.85714285714283"/>
         </scene>
         <!--Nurse View Controller-->
         <scene sceneID="6Ek-7H-rWc">
@@ -326,6 +372,9 @@
                                         <rect key="frame" x="0.0" y="311" width="334" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Dashboard"/>
+                                        <connections>
+                                            <segue destination="f7w-BB-FoE" kind="show" id="7ve-hA-ZeE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -406,12 +455,12 @@
                     <navigationItem key="navigationItem" id="dTS-3S-zzV"/>
                     <connections>
                         <outlet property="SaveButton" destination="jf2-iq-Owt" id="QAM-cW-ODv"/>
-                        <outlet property="TableView" destination="9fa-qq-6ar" id="qy6-Ue-bEF"/>
+                        <outlet property="TableView" destination="9fa-qq-6ar" id="vyn-xC-OB7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lWI-o4-7im" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4036.2318840579715" y="455.35714285714283"/>
+            <point key="canvasLocation" x="3980" y="394"/>
         </scene>
         <!--Input View Controller-->
         <scene sceneID="8D9-qK-9Ou">
@@ -428,6 +477,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Voice Input"/>
+                                        <connections>
+                                            <action selector="didTapVoice:" destination="Gje-xY-knJ" eventType="touchUpInside" id="3eg-Dd-pte"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Patient name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NDj-xv-CsU">
                                         <rect key="frame" x="0.0" y="51" width="334" height="34"/>
@@ -493,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mcC-Zp-7RT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4828.985507246377" y="-377.00892857142856"/>
+            <point key="canvasLocation" x="4897" y="-592"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uGV-iB-sS4">
@@ -514,6 +566,9 @@
             <point key="canvasLocation" x="3134.7826086956525" y="-275.22321428571428"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7ve-hA-ZeE"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

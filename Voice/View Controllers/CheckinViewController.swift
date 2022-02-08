@@ -56,33 +56,37 @@ class CheckinViewController: UIViewController {
     @IBAction func SaveTapped(_ sender: Any) {
         var values : [String] = []
         let selected_indexPaths = TableView.indexPathsForSelectedRows
-        for indexPath in selected_indexPaths! {
-            let cell = tableView(TableView, cellForRowAt: indexPath) as! CheckInTableViewCell
-            values.append(cell.TextView.text!)
-        }
-        for val in values{
-            let sentence = val.components(separatedBy: " ")
-            let patient = sentence[5] + " " + sentence[6];
-            print(patient);
-            let db = Firestore.firestore()
-            // potentially add more whereField conditions (time, date, etc) here to guarantee correct match
-            db.collection("medical").whereField("nurseUID", isEqualTo: Auth.auth().currentUser!.uid).whereField("patient", isEqualTo: patient)
-                .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                }
-                else{
-                    for document in querySnapshot!.documents {
-                        let docID = document.documentID;
-                        // change completed field to true
-                        print("computer has reached this code");
-                        print(document["medicine"] as! String);
-                        db.collection("medical").document(docID).updateData(["completed" : true]);
+        if(selected_indexPaths != nil){
+            for indexPath in selected_indexPaths! {
+                let cell = tableView(TableView, cellForRowAt: indexPath) as! CheckInTableViewCell
+                values.append(cell.TextView.text!)
+            }
+            
+            for val in values{
+                let sentence = val.components(separatedBy: " ")
+                let patient = sentence[5] + " " + sentence[6];
+                print(patient);
+                let db = Firestore.firestore()
+                
+                // potentially add more whereField conditions (time, date, etc) here to guarantee correct match
+                db.collection("medical").whereField("nurseUID", isEqualTo: Auth.auth().currentUser!.uid).whereField("patient", isEqualTo: patient)
+                    .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    }
+                    else{
+                        for document in querySnapshot!.documents {
+                            let docID = document.documentID;
+                            // change completed field to true
+                            print("computer has reached this code");
+                            print(document["medicine"] as! String);
+                            db.collection("medical").document(docID).updateData(["completed" : true]);
+                        }
                     }
                 }
             }
         }
-        print(values);
+        transitionToNurse()
     }
 }
 extension CheckinViewController: UITableViewDelegate, UITableViewDataSource {
@@ -109,6 +113,14 @@ extension CheckinViewController: UITableViewDelegate, UITableViewDataSource {
 //            TableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
 //        }
 //    }
+    func transitionToNurse(){
+        let nurseViewCOntroller =
+        storyboard?.instantiateViewController(withIdentifier:
+            Constants.Storyboard.nurseViewController) as?
+            NurseViewController
+        view.window?.rootViewController = nurseViewCOntroller
+        view.window?.makeKeyAndVisible()
+    }
 }
 
 

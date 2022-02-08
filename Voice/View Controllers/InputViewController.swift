@@ -57,7 +57,8 @@ class InputViewController: UIViewController {
         voiceOverlay.settings.autoStop=true;
         voiceOverlay.settings.autoStopTimeout = 2;
         voiceOverlay.start(on: self, textHandler: {text, final, _ in
-            if final{
+            if final{                
+                // will throw error if array contains less than 7 elements
                 let sentence = text.components(separatedBy: " ")
                 self.patient.text = sentence[0] + " " + sentence[1];
                 self.medicine.text = sentence[2];
