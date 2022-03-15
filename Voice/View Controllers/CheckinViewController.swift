@@ -84,11 +84,12 @@ class CheckinViewController: UIViewController {
         // connect to firebase to resolve task
         for val in values{
             let sentence = val.components(separatedBy: " ")
-            let patient = sentence[5] + " " + sentence[6];
-            print(patient);
+            let count = sentence.count
+            let time = sentence[count-6] + " " + sentence[count-5] + " " +  sentence[count-4] + " " +  sentence[count-3] + " " +  sentence[count-2] + " " + sentence[count-1];
+            print(time);
             let db = Firestore.firestore()
             // potentially add more whereField conditions (time, date, etc) here to guarantee correct match
-            db.collection("medical").whereField("nurseUID", isEqualTo: Auth.auth().currentUser!.uid).whereField("patient", isEqualTo: patient)
+            db.collection("medical").whereField("nurseUID", isEqualTo: Auth.auth().currentUser!.uid).whereField("time", isEqualTo: time)
                 .getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
@@ -98,7 +99,6 @@ class CheckinViewController: UIViewController {
                         let docID = document.documentID;
                         // change completed field to true
                         print("computer has reached this code");
-                        print(document["medicine"] as! String);
                         db.collection("medical").document(docID).updateData(["completed" : true]);
                     }
                 }
@@ -106,12 +106,8 @@ class CheckinViewController: UIViewController {
         }
         transitionToNurse()
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        tableView.frame = view.bounds
-//    }
 }
+
 extension CheckinViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return number of tasks for nurse
